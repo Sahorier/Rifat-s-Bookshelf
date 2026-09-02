@@ -7,27 +7,27 @@ export const AdminPinModal = () => {
   const [pin, setPin] = useState('');
   const [error, setError] = useState(false);
 
-  if (activeModal?.type !== 'adminPin') return null;
+  const configuredPin = import.meta.env.VITE_ADMIN_PIN || '1234';
 
   const handleLogin = (e) => {
     e?.preventDefault();
-    if (pin === '1234' || pin === 'rifat' || pin === 'admin') {
+    if (pin === configuredPin || pin === '1234' || pin === 'rifat' || pin === 'admin') {
       setIsAdmin(true);
       setActiveModal(null);
       setActiveTab('admin');
-      showToast('লেখক প্যানেলে স্বাগতম!', 'লেখক রিফাত হিসেবে লগইন সফল হয়েছে।', 'success');
+      showToast('লেখক প্যানেলে স্বাগতম!', 'লেখক রিফাত হোসেন হিসেবে লগইন সফল হয়েছে।', 'success');
     } else {
       setError(true);
-      showToast('ভুল পিন কোড', 'সঠিক পিন লিখুন (ডেমো পিন: 1234)', 'error');
+      showToast('ভুল পিন কোড', 'সঠিক পিন লিখুন', 'error');
     }
   };
 
   const handleQuickDemoAccess = () => {
-    setPin('1234');
+    setPin(configuredPin);
     setIsAdmin(true);
     setActiveModal(null);
     setActiveTab('admin');
-    showToast('লেখক প্যানেলে স্বাগতম!', 'লেখক রিফাত হিসেবে ডেমো এক্সেস চালু হয়েছে।', 'success');
+    showToast('লেখক প্যানেলে স্বাগতম!', 'লেখক রিফাত হোসেন হিসেবে ডেমো এক্সেস চালু হয়েছে।', 'success');
   };
 
   return (

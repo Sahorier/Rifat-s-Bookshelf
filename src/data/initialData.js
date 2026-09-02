@@ -1,17 +1,17 @@
 // Initial Seed Data for Rifat's Bookshelf
 export const initialAuthorInfo = {
-  name: "রিফাত হোসেন (Rifat Hossain)",
-  shortName: "রিফাত হোসেন",
+  name: import.meta.env?.VITE_AUTHOR_NAME ? `${import.meta.env.VITE_AUTHOR_NAME} (Rifat Hossain)` : "রিফাত হোসেন (Rifat Hossain)",
+  shortName: import.meta.env?.VITE_AUTHOR_NAME || "রিফাত হোসেন",
   tagline: "শব্দের কারিগর, নির্জনতার কবি ও গল্পকার",
   bio: "কবিতা ও সাহিত্যের এক নিভৃত পথিক। শব্দ ও অনুভূতির মেলবন্ধনে গড়ে তোলা রিফাত হোসেনের সাহিত্য ভুবনে আপনাকে স্বাগতম। এখানে মুদ্রিত হয় না-বলা কথা, মেঘের চিঠি আর নিঃশব্দ মানুষের দীর্ঘশ্বাস।",
   englishBio: "Poet, essayist, and contemplative writer capturing the fragile nuances of human solitude, love, and philosophy through contemporary Bengali & English literature.",
   avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600",
   coverImage: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&q=80&w=1600",
-  facebookPageName: "Rifat's Literary Works (রিফাত হোসেনের সাহিত্য পাতা)",
+  facebookPageName: import.meta.env?.VITE_FACEBOOK_PAGE_NAME || "Rifat's Literary Works (রিফাত হোসেনের সাহিত্য পাতা)",
   facebookUsername: "rifats.bookshelf",
-  facebookPageUrl: "https://facebook.com/rifats.bookshelf",
-  messengerUrl: "https://m.me/rifats.bookshelf",
-  email: "contact@rifatsbookshelf.com",
+  facebookPageUrl: import.meta.env?.VITE_FACEBOOK_PAGE_URL || "https://facebook.com/rifats.bookshelf",
+  messengerUrl: import.meta.env?.VITE_MESSENGER_URL || "https://m.me/rifats.bookshelf",
+  email: import.meta.env?.VITE_AUTHOR_EMAIL || "contact@rifatsbookshelf.com",
   phone: "+880 1712-345678",
   location: "Dhaka, Bangladesh",
   quoteOfTheDay: {
