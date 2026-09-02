@@ -30,3 +30,4 @@ dist-ssr
 
 # Agent/Temp files
 .system_generated
+.agents
