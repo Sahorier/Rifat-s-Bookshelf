@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-paper: #FAF8F5;
+    --text-ink: #231C15;
+    --border-paper: #EAE1D6;
+  }
+
+  .dark {
+    --bg-paper: #0B0E17;
+    --text-ink: #FAF8F5;
+    --border-paper: #1F273E;
+  }
+
+  body {
+    background-color: var(--bg-paper);
+    color: var(--text-ink);
+    overflow-x: hidden;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #CBBBA8;
+    border-radius: 9999px;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #3D4D77;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94816C;
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #536696;
+  }
+}
+
+/* Strict Print Prevention for DRM */
+@media print {
+  body, #root, .drm-protected, .book-reader-container {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  body::after {
+    content: "Printing and exporting this literary work is prohibited under copyright license. (Rifat's Bookshelf)";
+    display: block !important;
+    font-size: 24pt;
+    text-align: center;
+    padding: 100px 20px;
+    color: #990000;
+  }
+}
+
+/* DRM Selection Blocking */
+.drm-protected {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+/* Paper Textures & Book Effects */
+.paper-texture {
+  background-color: #FAF8F5;
+  background-image: radial-gradient(#E8DFC8 0.75px, transparent 0.75px), radial-gradient(#E8DFC8 0.75px, #FAF8F5 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+.paper-texture-sepia {
+  background-color: #F4ECD8;
+  background-image: radial-gradient(#DECFA9 0.75px, transparent 0.75px), radial-gradient(#DECFA9 0.75px, #F4ECD8 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+.paper-texture-dark {
+  background-color: #141A2B;
+  background-image: radial-gradient(#222C46 0.75px, transparent 0.75px), radial-gradient(#222C46 0.75px, #141A2B 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+/* 3D Realistic Book Flipping and Spine Styles */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Wooden Shelf Effect */
+.wooden-shelf {
+  background: linear-gradient(180deg, #4A2E18 0%, #341F0E 40%, #201308 100%);
+  box-shadow: inset 0 3px 6px rgba(255,255,255,0.15), 0 15px 25px rgba(0,0,0,0.6);
+  border-bottom: 8px solid #180D05;
+}
+
+.wooden-shelf::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(90deg, #5C3A1E 0%, #784C28 50%, #5C3A1E 100%);
+}
+
+/* Page Curvature & Shading */
+.page-shadow-left {
+  box-shadow: inset 20px 0 25px -15px rgba(0,0,0,0.25), inset -5px 0 10px rgba(0,0,0,0.05);
+}
+
+.page-shadow-right {
+  box-shadow: inset -20px 0 25px -15px rgba(0,0,0,0.25), inset 5px 0 10px rgba(0,0,0,0.05);
+}
+
+.book-spine-crease {
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
+}
+
+/* Watermark Overlay */
+.watermark-pattern {
+  background-image: repeating-linear-gradient(-45deg, rgba(180, 83, 9, 0.04), rgba(180, 83, 9, 0.04) 1px, transparent 1px, transparent 60px);
+}
+
+/* Stanza Highlight */
+::selection {
+  background: rgba(217, 119, 6, 0.25);
+  color: #92400e;
+}
+.dark ::selection {
+  background: rgba(251, 191, 36, 0.25);
+  color: #fef3c7;
+}
+
+/* Gold shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.gold-shimmer {
+  background: linear-gradient(90deg, #d97706 0%, #fde68a 50%, #d97706 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite linear;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
