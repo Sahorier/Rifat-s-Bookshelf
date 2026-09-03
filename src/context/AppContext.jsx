@@ -115,13 +115,16 @@ export const AppProvider = ({ children }) => {
     };
   }, []);
 
-  // Toast System
+  // Toast System (deduplicated)
   const showToast = (title, message, type = 'info') => {
     const id = Date.now() + Math.random();
-    setToasts(prev => [...prev, { id, title, message, type }]);
+    setToasts(prev => {
+      const filtered = prev.filter(t => t.title !== title);
+      return [...filtered.slice(-1), { id, title, message, type }];
+    });
     setTimeout(() => {
       setToasts(prev => prev.filter(t => t.id !== id));
-    }, 4000);
+    }, 3500);
   };
 
   const removeToast = (id) => {

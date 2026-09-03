@@ -1,43 +1,37 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { ShieldCheck, X, KeyRound, Lock, Sparkles, Check } from 'lucide-react';
+import { ShieldCheck, X, Lock, KeyRound } from 'lucide-react';
 
 export const AdminPinModal = () => {
   const { activeModal, setActiveModal, setIsAdmin, setActiveTab, showToast } = useApp();
   const [pin, setPin] = useState('');
   const [error, setError] = useState(false);
 
-  const configuredPin = import.meta.env.VITE_ADMIN_PIN || '1234';
+  if (activeModal?.type !== 'adminPin') return null;
+
+  const configuredPin = import.meta.env.VITE_ADMIN_PIN || '1917';
 
   const handleLogin = (e) => {
     e?.preventDefault();
-    if (pin === configuredPin || pin === '1234' || pin === 'rifat' || pin === 'admin') {
+    if (pin.trim() === configuredPin.trim()) {
       setIsAdmin(true);
       setActiveModal(null);
       setActiveTab('admin');
       showToast('লেখক প্যানেলে স্বাগতম!', 'লেখক রিফাত হোসেন হিসেবে লগইন সফল হয়েছে।', 'success');
     } else {
       setError(true);
-      showToast('ভুল পিন কোড', 'সঠিক পিন লিখুন', 'error');
+      showToast('ভুল পিন কোড', 'অনুগ্রহ করে সঠিক পিন কোড লিখুন।', 'error');
     }
   };
 
-  const handleQuickDemoAccess = () => {
-    setPin(configuredPin);
-    setIsAdmin(true);
-    setActiveModal(null);
-    setActiveTab('admin');
-    showToast('লেখক প্যানেলে স্বাগতম!', 'লেখক রিফাত হোসেন হিসেবে ডেমো এক্সেস চালু হয়েছে।', 'success');
-  };
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-white dark:bg-ink-900 rounded-3xl max-w-sm w-full overflow-hidden shadow-2xl border border-parchment-200 dark:border-ink-700 p-6 flex flex-col items-center text-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fadeIn">
+      <div className="bg-white dark:bg-ink-900 rounded-3xl max-w-sm w-full overflow-hidden shadow-2xl border border-parchment-200 dark:border-ink-700 p-6 sm:p-8 flex flex-col items-center text-center">
         
         <div className="w-full flex justify-end">
           <button
             onClick={() => setActiveModal(null)}
-            className="p-1 rounded-full text-parchment-400 hover:text-parchment-800 dark:hover:text-parchment-100"
+            className="p-1 rounded-full text-parchment-400 hover:text-parchment-800 dark:hover:text-parchment-100 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -61,7 +55,7 @@ export const AdminPinModal = () => {
               maxLength={6}
               value={pin}
               onChange={(e) => { setPin(e.target.value); setError(false); }}
-              placeholder="পিন কোড লিখুন (1234)"
+              placeholder="গোপন পিন লিখুন"
               autoFocus
               className={`w-full text-center tracking-widest text-lg font-mono py-3 px-4 rounded-xl bg-parchment-50 dark:bg-ink-950 border ${
                 error ? 'border-rose-500 ring-2 ring-rose-500/20' : 'border-parchment-300 dark:border-ink-700'
@@ -71,23 +65,12 @@ export const AdminPinModal = () => {
 
           <button
             type="submit"
-            className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-600 to-amber-800 hover:from-amber-700 hover:to-amber-900 text-white font-serif font-bold shadow-md transition-all flex items-center justify-center gap-2"
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-600 to-amber-800 hover:from-amber-700 hover:to-amber-900 text-white font-serif font-bold shadow-md transition-all flex items-center justify-center gap-2 active:scale-98"
           >
             <ShieldCheck className="w-4 h-4" />
             <span>প্রবেশ করুন</span>
           </button>
         </form>
-
-        {/* Quick Demo Access Link */}
-        <div className="mt-4 pt-4 border-t border-parchment-200 dark:border-ink-800 w-full">
-          <button
-            onClick={handleQuickDemoAccess}
-            className="w-full py-2 text-xs font-sans text-amber-700 dark:text-amber-400 hover:underline flex items-center justify-center gap-1.5"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>১-ক্লিকে ডেমো লেখক এক্সেস (PIN: 1234)</span>
-          </button>
-        </div>
 
       </div>
     </div>
