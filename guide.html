@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Rifat's Bookshelf — Complete Website & Workflow Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 14mm 18mm 14mm;
+      @bottom-right {
+        content: "পৃষ্ঠা " counter(page);
+        font-family: 'Noto Serif Bengali', serif;
+        font-size: 9pt;
+        color: #888;
+      }
+      @top-right {
+        content: "Rifat's Bookshelf • পূর্ণাঙ্গ ব্যবহার নির্দেশিকা ও ওয়ার্কফ্লো";
+        font-family: 'Noto Serif Bengali', serif;
+        font-size: 8pt;
+        color: #999;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Noto Serif Bengali', 'Cormorant Garamond', 'Inter', serif;
+      color: #1e1e1e;
+      background: #ffffff;
+      line-height: 1.6;
+      font-size: 10.5pt;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Noto Serif Bengali', 'Cormorant Garamond', serif;
+      color: #381f12;
+      margin-top: 0;
+    }
+
+    /* Cover Page */
+    .cover-page {
+      page-break-after: always;
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 4px double #8c6d46;
+      padding: 40px 30px;
+      text-align: center;
+      background: linear-gradient(135deg, #FAF8F5 0%, #F5EFE6 100%);
+      position: relative;
+    }
+
+    .cover-emblem {
+      width: 80px;
+      height: 80px;
+      margin: 20px auto;
+      background: linear-gradient(135deg, #b45309, #78350f);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(180, 83, 9, 0.25);
+    }
+
+    .cover-title {
+      font-family: 'Cinzel', 'Noto Serif Bengali', serif;
+      font-size: 32pt;
+      font-weight: 800;
+      color: #2c180b;
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+    }
+
+    .cover-subtitle {
+      font-size: 16pt;
+      color: #8c4a16;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    .cover-desc {
+      max-width: 500px;
+      margin: 0 auto;
+      font-size: 11pt;
+      color: #554433;
+      line-height: 1.8;
+      border-top: 1px solid #d4c4b0;
+      border-bottom: 1px solid #d4c4b0;
+      padding: 15px 0;
+    }
+
+    .cover-meta {
+      margin-top: 40px;
+      font-size: 10pt;
+      color: #665544;
+      line-height: 1.8;
+    }
+
+    .meta-box {
+      display: inline-block;
+      text-align: left;
+      background: #ffffff;
+      border: 1px solid #d4c4b0;
+      padding: 15px 25px;
+      border-radius: 12px;
+    }
+
+    /* Standard Page Layout */
+    .section-page {
+      page-break-after: always;
+      padding: 10px 0;
+    }
+
+    .page-header-title {
+      font-size: 18pt;
+      font-weight: 700;
+      color: #8c4a16;
+      border-bottom: 2px solid #8c6d46;
+      padding-bottom: 6px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .workflow-card {
+      background: #fdfbf7;
+      border: 1px solid #e5d8c5;
+      border-left: 4px solid #b45309;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+
+    .workflow-title {
+      font-size: 12.5pt;
+      font-weight: 700;
+      color: #3b2314;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .workflow-steps {
+      margin: 6px 0 0 0;
+      padding-left: 20px;
+      font-size: 10pt;
+      color: #332b24;
+    }
+
+    .workflow-steps li {
+      margin-bottom: 5px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 8pt;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: #fef3c7;
+      color: #92400e;
+      text-transform: uppercase;
+    }
+
+    .tag-blue {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .tag-green {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .tag-rose {
+      background: #ffe4e6;
+      color: #9f1239;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 9.5pt;
+    }
+
+    th, td {
+      border: 1px solid #d4c4b0;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #f5efe6;
+      color: #3b2314;
+      font-weight: 700;
+    }
+
+    tr:nth-child(even) {
+      background: #faf8f5;
+    }
+
+    .callout {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 9.5pt;
+      color: #78350f;
+      margin: 12px 0;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== COVER PAGE ==================== -->
+  <div class="cover-page">
+    <div>
+      <div style="font-size: 11pt; letter-spacing: 3px; color: #8c6d46; text-transform: uppercase; font-weight: 600;">
+        অফিসিয়াল সিস্টেম নির্দেশিকা ও আর্কিটেকচার
+      </div>
+      
+      <div class="cover-emblem">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#FDE68A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          <path d="M12 2v8" stroke="#FDE68A" stroke-width="2.5"></path>
+        </svg>
+      </div>
+
+      <div class="cover-title">Rifat's Bookshelf</div>
+      <div class="cover-subtitle">রিফাত হোসেন — সাহিত্য, কাব্য ও ডিজিটাল প্রকাশনা প্ল্যাটফর্ম</div>
+      
+      <div class="cover-desc">
+        অনলাইন ৩ডি বুক রিডার, কবিতার খেরোখাতা ও পাঠকদের পরামর্শ, সাহিত্য ব্লগ, ফেসবুক মেসেঞ্জার অর্ডার ইন্টিগ্রেশন, ভিআইপি ডিজিটাল এক্সেস এবং লেখক অ্যাডমিন স্টুডিওর পূর্ণাঙ্গ ব্যবহার নির্দেশিকা।
+      </div>
+    </div>
+
+    <div class="cover-meta">
+      <div class="meta-box">
+        <div><strong>লেখক ও সত্ত্বাধিকারী:</strong> রিফাত হোসেন (Rifat Hossain)</div>
+        <div><strong>সিস্টেম ভার্সন:</strong> v2.0 (Render Ready / Static SPA)</div>
+        <div><strong>অ্যাডমিন পিন:</strong> 1917 (গোপন লেখক কন্ট্রোল)</div>
+        <div><strong>লাইভ রিপোজিটরি:</strong> github.com/Sahorier/Rifat-s-Bookshelf</div>
+        <div><strong>তারিখ:</strong> সেপ্টেম্বর ২০২৪ - ২০২৬</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 1: SYSTEM OVERVIEW & ARCHITECTURE ==================== -->
+  <div class="section-page">
+    <div class="page-header-title">
+      <span>১. সিস্টেম পরিচিতি ও প্রযুক্তিগত কাঠামো</span>
+      <span class="tag tag-green">Architecture Overview</span>
+    </div>
+
+    <p style="font-size: 10pt; color: #443322;">
+      <strong>Rifat's Bookshelf (রিফাতের বুকশেলফ)</strong> আধুনিক ওয়েব আর্কিটেকচারের ওপর নির্মিত একটি সাহিত্যভিত্তিক ডিজিটাল ইকোসিস্টেম। এতে লেখক ও পাঠকদের সংযোগ, সাহিত্য পাঠ, মন্তব্য বিনিময় এবং ফেসবুকের মাধ্যমে বই অর্ডার ও তাৎক্ষণিক ডিজিটাল কপি ও PDF সংগ্রহের সমস্ত সুবিধা সমন্বিত রয়েছে।
+    </p>
+
+    <div class="grid-2">
+      <div class="workflow-card">
+        <div class="workflow-title">
+          <span>🛠️ মূল টেকনোলজি স্ট্যাক</span>
+        </div>
+        <ul class="workflow-steps">
+          <li><strong>Frontend:</strong> React 18 (SPA Architecture)</li>
+          <li><strong>Build Tool:</strong> Vite 6 (Ultra-fast HMR & Bundler)</li>
+          <li><strong>Styling:</strong> TailwindCSS (Custom Parchment Palette)</li>
+          <li><strong>Audio Synthesis:</strong> Web Audio API Soundscape</li>
+          <li><strong>DRM Layer:</strong> CSS @media print + Anti-Screenshot</li>
+          <li><strong>PDF Generator:</strong> A4 High-Res Document Engine</li>
+        </ul>
+      </div>
+
+      <div class="workflow-card">
+        <div class="workflow-title">
+          <span>☁️ হোস্টিং ও ডেপ্লয়মেন্ট সুবিধা</span>
+        </div>
+        <ul class="workflow-steps">
+          <li><strong>Render Deployment:</strong> <code>render.yaml</code> ব্লুপ্রিন্ট কনফিগারেশন</li>
+          <li><strong>SPA Redirects:</strong> <code>public/_redirects</code> (200 Rewrite)</li>
+          <li><strong>Local Persistence:</strong> Browser LocalStorage Data Engine</li>
+          <li><strong>Tunnel Support:</strong> Ngrok & Localtunnel Forwarding</li>
+          <li><strong>Environment Vars:</strong> <code>.env</code> ও <code>.env.example</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-size: 13pt; margin-top: 15px; margin-bottom: 8px;">📊 ডেটা ও স্টেট ম্যানেজমেন্ট ফ্লো</h3>
+    <p style="font-size: 9.5pt; color: #554433;">
+      অ্যাপ্লিকেশনটির সমস্ত ডেটা (বই তালিকা, কবিতা, ব্লগ প্রবন্ধ, পাঠকদের পরামর্শ, মন্তব্য ও ফেসবুক অর্ডার) রিঅ্যাক্ট গ্লোবাল কনটেক্সট <code>AppContext.jsx</code> এবং ব্রাউজারের লোকালস্টোরেজের মাধ্যমে স্বয়ংক্রিয়ভাবে সিঙ্ক হয়। ফলে সার্ভারলেস বা স্ট্যাটিক সাইট হিসেবে রেন্ডার বা নেটলিফাইতে হোস্ট করলেও লেখকের যুক্ত করা সকল তথ্য স্থায়ী থাকে।
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>মডিউল নাম</th>
+          <th>প্রাথমিক রুট / অ্যাকশন</th>
+          <th>প্রধান বৈশিষ্ট্যসমূহ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>মুক্ত পাঠাগার</strong></td>
+          <td><code>Tab: bookshelf</code></td>
+          <td>অনলাইন ৩ডি পেজ-ফ্লিপ ও প্যাড মোড রিডার (কপিরাইট সুরক্ষিত, ফ্রি)</td>
+        </tr>
+        <tr>
+          <td><strong>কবিতার খেরোখাতা</strong></td>
+          <td><code>Tab: poems</code></td>
+          <td>অসমাপ্ত পঙ্‌ক্তি, পাঠকদের পরামর্শ লবি, সোশ্যাল কোট কার্ড জেনারেটর</td>
+        </tr>
+        <tr>
+          <td><strong>চিন্তার জলছবি</strong></td>
+          <td><code>Tab: blog</code></td>
+          <td>সাহিত্য প্রবন্ধ, ৫টি রিঅ্যাকশন, থ্রেডেড কমেন্ট ও লেখকের ভেরিফাইড রিপ্লাই</td>
+        </tr>
+        <tr>
+          <td><strong>বই সম্ভার</strong></td>
+          <td><code>Tab: shop</code></td>
+          <td>ডিজিটাল ই-বুক শপ, ফেসবুক অর্ডার অটো-মেসেঞ্জার, ৫-স্টার রিভিউ</td>
+        </tr>
+        <tr>
+          <td><strong>লেখক স্টুডিও</strong></td>
+          <td><code>Route: /#admin (PIN: 1917)</code></td>
+          <td>বিক্রয় রিপোর্ট, ১-ক্লিকে এক্সেস মঞ্জুর, ফাইল আপলোডসহ ক্যাটালগ ম্যানেজার</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== PAGE 2: READER WORKFLOWS ==================== -->
+  <div class="section-page">
+    <div class="page-header-title">
+      <span>২. সাধারণ পাঠক ও ব্যবহারকারীদের জন্য পূর্ণাঙ্গ ওয়ার্কফ্লো</span>
+      <span class="tag tag-blue">Reader Workflows</span>
+    </div>
+
+    <!-- Workflow 1 -->
+    <div class="workflow-card">
+      <div class="workflow-title">
+        <span>📖 ওয়ার্কফ্লো ১: মুক্ত পাঠাগার ও ৩ডি বই পড়ার অভিজ্ঞতা</span>
+        <span class="tag">Online Reader</span>
+      </div>
+      <p style="font-size: 9.5pt; margin-bottom: 4px; color: #554;">
+        পাঠকরা 'মুক্ত পাঠাগার' ট্যাবে গিয়ে যেকোনো ফ্রি বই নির্বাচন করে অনলাইন রিডারে পড়তে পারেন।
+      </p>
+      <ol class="workflow-steps">
+        <li><strong>ভিউ মোড নির্বাচন:</strong> ডেস্কটপ ডিভাইসে ডিফল্ট <strong>৩ডি বুক স্প্রেড (2-Page Spread)</strong> চালু হয়।</li>
+        <li><strong>প্যাড মোড (Android & Tablet):</strong> মোবাইল বা ট্যাবলেটে স্বয়ংক্রিয়ভাবে <strong>'প্যাড মোড'</strong> সক্রিয় হয়, যা উপরে-নিচে স্ক্রলিং ও Up/Down বাটন দিয়ে পড়ার সর্বোচ্চ স্পেস নিশ্চিত করে।</li>
+        <li><strong>থিম পরিবর্তন:</strong> পাঠকরা Parchment, Sepia, Cream অথবা Midnight Dark থিম বেছে নিতে পারেন।</li>
+        <li><strong>কপিরাইট সুরক্ষা (DRM):</strong> মুক্ত পাঠাগারের বইসমূহ ডাউনলোড বা প্রিন্ট করা যায় না (স্ক্রিনশট প্রটেকশন শিল্ড সক্রিয় থাকে)।</li>
+      </ol>
+    </div>
+
+    <!-- Workflow 2 -->
+    <div class="workflow-card">
+      <div class="workflow-title">
+        <span>📜 ওয়ার্কফ্লো ২: কবিতার খেরোখাতা ও পাঠকদের পরামর্শ প্রদান</span>
+        <span class="tag">Poetry Hub</span>
+      </div>
+      <ol class="workflow-steps">
+        <li><strong>পরামর্শ চাওয়া পঙ্‌ক্তি:</strong> যেসব কবিতার পাশে <span class="tag tag-rose">পরামর্শ প্রত্যাশিত</span> ব্যাজ রয়েছে, সেগুলোর অসমাপ্ত চরণে পাঠকরা তাদের নিজস্ব ভাবনা ও লাইন সাবমিট করতে পারেন।</li>
+        <li><strong>লেখকের রিপ্লাই:</strong> লেখক রিফাত হোসেন কোনো পরামর্শ পছন্দ করলে অ্যাডমিন প্যানেল থেকে সরাসরি রিপ্লাই প্রদান করেন।</li>
+        <li><strong>সোশ্যাল কোট কার্ড জেনারেটর:</strong> পাঠকরা যেকোনো কবিতার প্রিয় পঙ্‌ক্তি নির্বাচন করে ১-ক্লিকে ফেসবুক/ইনস্টাগ্রাম স্টোরি সাইজের আকর্ষণীয় <strong>Quote Card</strong> তৈরি ও ডাউনলোড করতে পারেন।</li>
+      </ol>
+    </div>
+
+    <!-- Workflow 3 -->
+    <div class="workflow-card">
+      <div class="workflow-title">
+        <span>✍️ ওয়ার্কফ্লো ৩: সাহিত্য ব্লগ, রিঅ্যাকশন ও আলোচনা</span>
+        <span class="tag">Literary Blog</span>
+      </div>
+      <ol class="workflow-steps">
+        <li><strong>ইন্টারেক্টিভ রিঅ্যাকশন:</strong> ব্লগের প্রতিটি প্রবন্ধে পাঠকরা ৫টি অনুভূতিতে রিঅ্যাক্ট করতে পারেন: ❤️ Love, ☕ Cozy, 💡 Inspired, ✍️ Deep, 👏 Bravo।</li>
+        <li><strong>মন্তব্য ও আলোচনা:</strong> পাঠকরা তাদের নাম ও ইমেল দিয়ে সরাসরি মতামত পোস্ট করতে পারেন। লেখক উত্তর দিলে তাতে গোল্ডেন <strong>'রিফাত হোসেন (লেখক)'</strong> ব্যাজ প্রদর্শিত হয়।</li>
+      </ol>
+    </div>
+
+    <!-- Workflow 4 -->
+    <div class="workflow-card">
+      <div class="workflow-title">
+        <span>🛍️ ওয়ার্কফ্লো ৪: বই সম্ভারে অর্ডার ও ফেসবুক মেসেঞ্জার ফ্লো</span>
+        <span class="tag tag-green">Facebook Buying Flow</span>
+      </div>
+      <ol class="workflow-steps">
+        <li><strong>বই পছন্দ ও প্রিভিউ:</strong> 'বই সম্ভার' থেকে বই নির্বাচন করে 'নমুনা পাতা পড়ুন' দিয়ে ফ্রি স্যাম্পল পাঠ করা যায়।</li>
+        <li><strong>ফেসবুক অর্ডার ফর্ম:</strong> 'অর্ডার ও PDF' বাটনে ক্লিক করে ক্রেতা তার নাম, ফোন নম্বর ও ইমেল পূরণ করেন।</li>
+        <li><strong>অটো-মেসেজ টেমপ্লেট:</strong> সিস্টেম স্বয়ংক্রিয়ভাবে বইয়ের নাম, মূল্য ও একটি ইউনিক <strong>Access Key (যেমন: VIP-9281)</strong> সম্বলিত মেসেজ তৈরি করে সরাসরি রিফাত হোসেনের ফেসবুক মেসেঞ্জারে পাঠিয়ে দেয়।</li>
+        <li><strong>রিকোয়েস্ট রেজিস্ট্রি:</strong> একইসাথে লেখকের অ্যাডমিন প্যানেলে অর্ডারটি 'Pending Access' হিসেবে যুক্ত হয়ে যায়।</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 3: VIP LIBRARY & DRM SECURITY ==================== -->
+  <div class="section-page">
+    <div class="page-header-title">
+      <span>৩. ভিআইপি ডিজিটাল লাইব্রেরি ও কপিরাইট সুরক্ষা ব্যবস্থা</span>
+      <span class="tag tag-rose">Security & DRM</span>
+    </div>
+
+    <div class="workflow-card">
+      <div class="workflow-title">
+        <span>🔑 ওয়ার্কফ্লো ৫: আমার বুকশেলফ (My VIP Library) ও PDF ডাউনলোড</span>
+        <span class="tag tag-green">VIP Unlocking</span>
+      </div>
+      <p style="font-size: 9.5pt; color: #554433;">
+        ফেসবুকে পেমেন্ট ও লেখক কর্তৃক এক্সেস অনুমোদনের পর ক্রেতারা তাদের ডিজিটাল বই আনলক ও সংরক্ষণ করতে পারেন:
+      </p>
+      <ol class="workflow-steps">
+        <li>হেডার থেকে <strong>'আমার বুকশেলফ'</strong> আইকনে ক্লিক করুন।</li>
+        <li>আপনার অর্ডারের প্রাপ্ত <strong>Access Key</strong> অথবা <strong>ইমেল অ্যাড্রেস</strong> দিয়ে 'আনলক করুন' চাপুন।</li>
+        <li>বইটি সাথে সাথে আনলক হয়ে যাবে।</li>
+        <li><strong>📥 PDF ডাউনলোড বাটন:</strong> অনুমোদিত অর্জিত বইগুলোর পাশে সক্রিয় 'PDF ডাউনলোড' বাটনে ক্লিক করে A4 সাইজের ফুল-কোয়ালিটি প্রিন্টেবল/ডিজিটাল PDF ফাইল সংগ্রহ করা যাবে।</li>
+      </ol>
+    </div>
+
+    <h3 style="font-size: 13pt; margin-top: 15px; margin-bottom: 8px;">🛡️ মাল্টি-লেয়ার DRM ও কপিরাইট প্রযুক্তি</h3>
+    <p style="font-size: 9.5pt; color: #443322;">
+      অনলাইনে উন্মুক্ত সাহিত্যকর্মের অননুমোদিত চুরি, পাইরেসি ও কপি রোধে সিস্টেমে নিম্নলিখিত সুরক্ষা প্রাচীর কার্যকর করা হয়েছে:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>নিরাপত্তা ফিচার</th>
+          <th>কার্যপ্রণালী</th>
+          <th>উদ্দেশ্য ও সুরক্ষা স্তর</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Anti-Screenshot Shield</strong></td>
+          <td><code>PrintScreen</code>, <code>Win+Shift+S</code>, <code>Cmd+Shift+3/4</code> চাপলে ব্ল্যাকআউট শিল্ড সক্রিয় হয় ও ক্লিপবোর্ড মুছে দেয়</td>
+          <td>স্ক্রিনশট বা স্ন্যাপিং টুলের মাধ্যমে বইয়ের পাতা ধারণ প্রতিরোধ</td>
+        </tr>
+        <tr>
+          <td><strong>Window Blur Protection</strong></td>
+          <td>ব্রাউজার উইন্ডো ফোকাস হারালে (Blur event) বইয়ের লেখাগুলো ব্লার (অস্পষ্ট) হয়ে যায়</td>
+          <td>ব্যাকগ্রাউন্ড স্ক্রিন ক্যাপচার বা ক্যামেরা টুল থেকে সুরক্ষা</td>
+        </tr>
+        <tr>
+          <td><strong>Text Copy Disabling</strong></td>
+          <td><code>user-select: none</code> ও রাইট-ক্লিক কনটেক্সট মেনু স্থায়ীভাবে নিষ্ক্রিয়</td>
+          <td>বইয়ের পঙ্‌ক্তি বা কবিতা সিলেক্ট ও কপি করা বন্ধ রাখা</td>
+        </tr>
+        <tr>
+          <td><strong>CSS Print Blocking</strong></td>
+          <td><code>@media print { body { display: none !important; } }</code></td>
+          <td>ব্রাউজারের Ctrl+P প্রিন্ট কমান্ডে ফাঁকা পৃষ্ঠা নিশ্চিত করা</td>
+        </tr>
+        <tr>
+          <td><strong>Dynamic Watermark</strong></td>
+          <td>অনলাইন রিডারের ব্যাকগ্রাউন্ডে স্বত্বাধিকারী ওয়াটারমার্ক প্যাটার্ন যুক্ত থাকে</td>
+          <td>ডিজিটাল সনাক্তকরণ ও ব্যক্তিগত লাইসেন্স নিশ্চিতকরণ</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>⚠️ কপিরাইট নীতি:</strong> মুক্ত পাঠাগারের সমস্ত বই শুধুমাত্র অনলাইন পাঠের জন্য উন্মুক্ত। লেখকের পূর্বানুমোদন ব্যতীত কোনো রচনা বাণিজ্যিক বা অবাণিজ্যিক উদ্দেশ্যে পুনঃপ্রকাশ আইনত দণ্ডনীয়।
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 4: AUTHOR ADMIN STUDIO ==================== -->
+  <div class="section-page">
+    <div class="page-header-title">
+      <span>৪. লেখক ও অ্যাডমিন কন্ট্রোল স্টুডিও (পূর্ণাঙ্গ গাইড)</span>
+      <span class="tag">Author Admin Guide</span>
+    </div>
+
+    <div class="workflow-card">
+      <div class="workflow-title">
+        <span>🔐 অ্যাডমিন প্যানেলে প্রবেশ ও নিরাপদ লগআউট</span>
+        <span class="tag tag-rose">PIN: 1917</span>
+      </div>
+      <ul class="workflow-steps">
+        <li><strong>প্রবেশের উপায়:</strong> ফুটারের নিচে থাকা গোপন <span class="tag">লেখক প্যানেল</span> লিংকে ক্লিক করুন অথবা কীবোর্ডে <code>Ctrl + Shift + A</code> চাপুন অথবা ব্রাউজারে <code>/#admin</code> লিখুন।</li>
+        <li><strong>পিন অথেনটিকেশন:</strong> নির্ধারিত পিন <strong><code>1917</code></strong> টাইপ করে 'প্রবেশ করুন' চাপুন।</li>
+        <li><strong>নিরাপদ লগআউট:</strong> কাজ শেষ হলে উপরের ডানদিকের <strong>'লগআউট'</strong> বাটনে ক্লিক করুন। এটি সেশন মুছে দেয় এবং URL থেকে <code>#admin</code> হ্যাশ স্বয়ংক্রিয়ভাবে ক্লিন করে ফেলে।</li>
+      </ul>
+    </div>
+
+    <h3 style="font-size: 13pt; margin-top: 15px; margin-bottom: 8px;">👑 অ্যাডমিন স্টুডিওর ৭টি প্রধান মডিউল ও কার্যপদ্ধতি</h3>
+
+    <div class="grid-2">
+      <div class="workflow-card">
+        <div class="workflow-title">
+          <span>📊 ১. ড্যাশবোর্ড ও বিক্রয় রিপোর্ট</span>
+        </div>
+        <p style="font-size: 9pt; color: #554433;">
+          মোট আয়, বিক্রিত বইয়ের সংখ্যা, সক্রিয় ভিআইপি পাঠক এবং ফেসবুক থেকে আসা পেন্ডিং অর্ডার সংখ্যা তাৎক্ষণিকভাবে পর্যবেক্ষণ করা যায়।
+        </p>
+      </div>
+
+      <div class="workflow-card">
+        <div class="workflow-title">
+          <span>👥 ২. অর্ডার ও এক্সেস কন্ট্রোল</span>
+        </div>
+        <p style="font-size: 9pt; color: #554433;">
+          ফেসবুক ইনবক্সে পেমেন্ট ভেরিফাই করে ১-ক্লিকে <strong>'এক্সেস দিন (Grant Access)'</strong> বাটনে চাপলেই ক্রেতার ডিজিটাল লাইব্রেরি আনলক হয়ে যায়।
+        </p>
+      </div>
+
+      <div class="workflow-card">
+        <div class="workflow-title">
+          <span>📚 ৩. বই ক্যাটালগ ও ছবি আপলোড</span>
+        </div>
+        <p style="font-size: 9pt; color: #554433;">
+          কম্পিউটার বা ফোন থেকে সরাসরি কভার ছবি ড্র্যাগ-অ্যান্ড-ড্রপ আপলোড করুন। ফরম্যাট (ডিজিটাল/মুদ্রিত/উভয়) ও বইয়ের পৃষ্ঠাসমূহ সম্পাদনা করুন।
+        </p>
+      </div>
+
+      <div class="workflow-card">
+        <div class="workflow-title">
+          <span>🏷️ ৪. অফার ও প্রোমো কুপন</span>
+        </div>
+        <p style="font-size: 9pt; color: #554433;">
+          বিশেষ ছাড় কোড (যেমন: <code>SHARAT20</code>) তৈরি করুন এবং ওয়েবসাইটের শীর্ষে চলন্ত ব্যানার সক্রিয় বা নিষ্ক্রিয় করুন।
+        </p>
+      </div>
+
+      <div class="workflow-card">
+        <div class="workflow-title">
+          <span>✍️ ৫. ব্লগ ও কবিতা প্রকাশনা</span>
+        </div>
+        <p style="font-size: 9pt; color: #554433;">
+          নতুন প্রবন্ধ বা কবিতা লিখুন। অসমাপ্ত কবিতার ক্ষেত্রে পাঠকদের পরামর্শ প্রম্পট যুক্ত করে তাৎক্ষণিক প্রকাশ করুন।
+        </p>
+      </div>
+
+      <div class="workflow-card">
+        <div class="workflow-title">
+          <span>💬 ৬. মন্তব্য ও পরামর্শ মডারেশন</span>
+        </div>
+        <p style="font-size: 9pt; color: #554433;">
+          পাঠকদের পরামর্শ ও মন্তব্যে লেখকের অফিসিয়াল ব্যাজ সহকারে উত্তর দিন বা অপ্রাসঙ্গিক কমেন্ট ডিলিট করুন।
+        </p>
+      </div>
+    </div>
+
+    <div class="workflow-card">
+      <div class="workflow-title">
+        <span>⚙️ ৭. লেখক প্রোফাইল ও সোশ্যাল সেটিংস</span>
+      </div>
+      <p style="font-size: 9pt; color: #554433;">
+        কবির বায়োগ্রাফি, ফেসবুক পেজ লিংক, মেসেঞ্জার আইডি, দৈনিক উক্তি এবং লেখকের প্রোফাইল ছবি ও ব্যানার সরাসরি ফাইল আপলোড দিয়ে পরিবর্তন করুন।
+      </p>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 5: RENDER DEPLOYMENT & MAINTENANCE ==================== -->
+  <div class="section-page">
+    <div class="page-header-title">
+      <span>৫. রেন্ডার ডেপ্লয়মেন্ট, এনভায়রনমেন্ট ও মেইনটেন্যান্স</span>
+      <span class="tag tag-green">Render & Production</span>
+    </div>
+
+    <div class="workflow-card">
+      <div class="workflow-title">
+        <span>🌐 রেন্ডারে (Render) প্রকাশের সহজ ধাপসমূহ</span>
+      </div>
+      <ol class="workflow-steps">
+        <li><strong>GitHub কানেক্ট:</strong> Render ড্যাশবোর্ডে গিয়ে <strong>New + $\rightarrow$ Static Site</strong> নির্বাচন করুন।</li>
+        <li><strong>রিপোজিটরি নির্বাচন:</strong> <code>Sahorier/Rifat-s-Bookshelf</code> সিলেক্ট করুন।</li>
+        <li><strong>বিল্ড সেটিংস:</strong>
+          <ul>
+            <li><strong>Build Command:</strong> <code>npm install && npm run build</code></li>
+            <li><strong>Publish Directory:</strong> <code>dist</code></li>
+          </ul>
+        </li>
+        <li><strong>Create Static Site</strong> চাপুন। ২ মিনিটের মধ্যে সাইটটি লাইভ হয়ে যাবে!</li>
+      </ol>
+    </div>
+
+    <h3 style="font-size: 13pt; margin-top: 15px; margin-bottom: 8px;">⚙️ এনভায়রনমেন্ট ভ্যারিয়েবল (.env) রেফারেন্স</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ভ্যারিয়েবল নাম</th>
+          <th>ডিফল্ট মান</th>
+          <th>বিবরণ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>VITE_APP_TITLE</code></td>
+          <td>"Rifat's Bookshelf"</td>
+          <td>ব্রাউজার ও লোগো টাইটেল</td>
+        </tr>
+        <tr>
+          <td><code>VITE_AUTHOR_NAME</code></td>
+          <td>"রিফাত হোসেন"</td>
+          <td>লেখক ও কপিরাইট নাম</td>
+        </tr>
+        <tr>
+          <td><code>VITE_ADMIN_PIN</code></td>
+          <td>"1917"</td>
+          <td>অ্যাডমিন কন্ট্রোল স্টুডিও পিন কোড</td>
+        </tr>
+        <tr>
+          <td><code>VITE_MESSENGER_URL</code></td>
+          <td>"https://m.me/rifats.bookshelf"</td>
+          <td>অর্ডার রিডাইরেক্ট মেসেঞ্জার লিংক</td>
+        </tr>
+        <tr>
+          <td><code>VITE_FACEBOOK_PAGE_URL</code></td>
+          <td>"https://facebook.com/rifats.bookshelf"</td>
+          <td>লেখকের অফিসিয়াল ফেসবুক পেজ</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 25px; text-align: center; border-top: 2px double #8c6d46; padding-top: 15px; font-size: 9.5pt; color: #776655;">
+      <strong>রিফাত হোসেন (Rifat Hossain) — সর্বস্বত্ব সংরক্ষিত © ২০২৪-২০২৬</strong><br>
+      ডিজিটাল সাহিত্য প্ল্যাটফর্ম ও বুকশেলফ ইকোসিস্টেম
+    </div>
+  </div>
+
+</body>
+</html>
