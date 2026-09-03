@@ -1,36 +1,47 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { ShieldCheck, X, Lock, KeyRound } from 'lucide-react';
+import { ShieldCheck, X, Lock } from 'lucide-react';
 
 export const AdminPinModal = () => {
-  const { activeModal, setActiveModal, setIsAdmin, setActiveTab, showToast } = useApp();
+  const { activeModal, setActiveModal, loginAdmin } = useApp();
   const [pin, setPin] = useState('');
   const [error, setError] = useState(false);
 
   if (activeModal?.type !== 'adminPin') return null;
 
-  const configuredPin = import.meta.env.VITE_ADMIN_PIN || '1917';
+  const handleClose = () => {
+    setActiveModal(null);
+    setPin('');
+    setError(false);
+    if (window.location.hash.includes('admin')) {
+      try {
+        history.replaceState(null, null, window.location.pathname);
+      } catch (e) {
+        window.location.hash = '';
+      }
+    }
+  };
 
-  const handleLogin = (e) => {
-    e?.preventDefault();
-    if (pin.trim() === configuredPin.trim()) {
-      setIsAdmin(true);
-      setActiveModal(null);
-      setActiveTab('admin');
-      showToast('লেখক প্যানেলে স্বাগতম!', 'লেখক রিফাত হোসেন হিসেবে লগইন সফল হয়েছে।', 'success');
-    } else {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!pin.trim()) return;
+
+    const success = loginAdmin(pin.trim());
+    if (!success) {
       setError(true);
-      showToast('ভুল পিন কোড', 'অনুগ্রহ করে সঠিক পিন কোড লিখুন।', 'error');
+    } else {
+      setPin('');
+      setError(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fadeIn font-sans">
       <div className="bg-white dark:bg-ink-900 rounded-3xl max-w-sm w-full overflow-hidden shadow-2xl border border-parchment-200 dark:border-ink-700 p-6 sm:p-8 flex flex-col items-center text-center">
         
         <div className="w-full flex justify-end">
           <button
-            onClick={() => setActiveModal(null)}
+            onClick={handleClose}
             className="p-1 rounded-full text-parchment-400 hover:text-parchment-800 dark:hover:text-parchment-100 transition-colors"
           >
             <X className="w-5 h-5" />
@@ -48,14 +59,14 @@ export const AdminPinModal = () => {
           বই তালিকা, বিক্রয় রিপোর্ট, পাঠকদের পরামর্শ, মন্তব্য মডারেশন এবং ফেসবুক অর্ডার এক্সেস প্রদানের কন্ট্রোল প্যানেল।
         </p>
 
-        <form onSubmit={handleLogin} className="w-full mt-6 space-y-4">
+        <form onSubmit={handleSubmit} className="w-full mt-6 space-y-4">
           <div className="relative">
             <input
               type="password"
               maxLength={6}
               value={pin}
               onChange={(e) => { setPin(e.target.value); setError(false); }}
-              placeholder="গোপন পিন লিখুন"
+              placeholder="গোপন পিন কোড লিখুন"
               autoFocus
               className={`w-full text-center tracking-widest text-lg font-mono py-3 px-4 rounded-xl bg-parchment-50 dark:bg-ink-950 border ${
                 error ? 'border-rose-500 ring-2 ring-rose-500/20' : 'border-parchment-300 dark:border-ink-700'

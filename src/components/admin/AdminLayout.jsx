@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 
 export const AdminLayout = () => {
-  const { authorInfo, setIsAdmin, setActiveTab, orders } = useApp();
+  const { authorInfo, logoutAdmin, setActiveTab, orders } = useApp();
   const [adminTab, setAdminTab] = useState('dashboard'); // 'dashboard', 'access', 'books', 'discounts', 'publish', 'comments', 'settings'
 
   const pendingOrdersCount = orders.filter(o => o.accessStatus === 'pending').length;
@@ -38,8 +38,7 @@ export const AdminLayout = () => {
   ];
 
   const handleLogout = () => {
-    setIsAdmin(false);
-    setActiveTab('home');
+    logoutAdmin();
   };
 
   return (

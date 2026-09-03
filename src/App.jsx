@@ -18,7 +18,7 @@ import { ShopView } from './components/shop/ShopView';
 import { AdminLayout } from './components/admin/AdminLayout';
 
 const MainContent = () => {
-  const { activeTab } = useApp();
+  const { activeTab, isAdmin } = useApp();
 
   return (
     <div className="min-h-screen flex flex-col bg-parchment-50 dark:bg-ink-950 text-parchment-900 dark:text-parchment-100 transition-colors duration-300">
@@ -33,7 +33,7 @@ const MainContent = () => {
         {activeTab === 'poems' && <PoemsView />}
         {activeTab === 'blog' && <BlogView />}
         {activeTab === 'shop' && <ShopView />}
-        {activeTab === 'admin' && <AdminLayout />}
+        {activeTab === 'admin' && (isAdmin ? <AdminLayout /> : <HomeView />)}
       </main>
 
       {/* Footer */}

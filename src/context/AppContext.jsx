@@ -92,8 +92,13 @@ export const AppProvider = ({ children }) => {
       const hash = window.location.hash;
       const path = window.location.pathname;
       if (hash.includes('admin') || path.includes('/admin')) {
-        setIsAdmin(true);
-        setActiveTab('admin');
+        const loggedIn = getStored('isAdmin', false);
+        if (loggedIn) {
+          setIsAdmin(true);
+          setActiveTab('admin');
+        } else {
+          setActiveModal({ type: 'adminPin' });
+        }
       }
     };
 
@@ -114,6 +119,38 @@ export const AppProvider = ({ children }) => {
       window.removeEventListener('keydown', handleSecretKey);
     };
   }, []);
+
+  // Admin Auth Handlers
+  const loginAdmin = (enteredPin) => {
+    const configuredPin = (import.meta.env.VITE_ADMIN_PIN || '1917').toString().trim();
+    if (enteredPin && enteredPin.toString().trim() === configuredPin) {
+      setIsAdmin(true);
+      setStored('isAdmin', true);
+      setActiveModal(null);
+      setActiveTab('admin');
+      window.location.hash = 'admin';
+      showToast('লেখক প্যানেলে স্বাগতম!', 'লেখক রিফাত হোসেন হিসেবে লগইন সফল হয়েছে।', 'success');
+      return true;
+    } else {
+      showToast('ভুল পিন কোড', 'সঠিক পিন কোড লিখুন।', 'error');
+      return false;
+    }
+  };
+
+  const logoutAdmin = () => {
+    setIsAdmin(false);
+    setStored('isAdmin', false);
+    setActiveTab('home');
+    setActiveModal(null);
+    if (window.location.hash.includes('admin')) {
+      try {
+        history.replaceState(null, null, window.location.pathname);
+      } catch (err) {
+        window.location.hash = '';
+      }
+    }
+    showToast('লগআউট সম্পন্ন', 'লেখক প্যানেল থেকে সফলভাবে লগআউট করা হয়েছে।', 'info');
+  };
 
   // Toast System (deduplicated)
   const showToast = (title, message, type = 'info') => {
@@ -552,7 +589,9 @@ export const AppProvider = ({ children }) => {
         saveEvent,
         toggleEventActive,
         deleteEvent,
-        rateBook
+        rateBook,
+        loginAdmin,
+        logoutAdmin
       }}
     >
       {children}
